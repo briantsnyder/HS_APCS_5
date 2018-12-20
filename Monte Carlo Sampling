@@ -1,0 +1,68 @@
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.File;
+import java.util.Scanner;
+import java.util.Random;
+public class AnimalPopulation
+{
+    public static void main (String [] args) throws IOException {
+        
+        PrintWriter outFile = new PrintWriter(new File("animalPopulation.txt")); // saves information out as this text file
+        
+        Scanner in = new Scanner(System.in); // initializes scanner
+        int randNum = 0; // integer for random number
+        Random randNumList = new Random(); // used to generate random number
+        
+        int count = 1; // counter, starts at 1 since the lowest possible spotting time is 1, not 0
+        
+        // Welcomes user and asks for # of trials
+        System.out.println("Welcome to the Fox Squirrel Simulator");
+        System.out.println("\nHow many trials should be simulated?");
+        System.out.print("Enter a value greater than or equal to 1000: ");
+        int numTrials = in.nextInt(); // saves value as an integer
+        
+        // while the number the user entered is less than 1000
+        while(numTrials < 1000) {
+            System.out.println("\nPlease try again. Enter a number greater than 1000."); // the system asks the user to try again
+            System.out.println("\nHow many trials should be simulated?");
+            System.out.print("Enter a value greater than or equal to 1000: ");
+            numTrials = in.nextInt();
+        }
+        // once he # of trials is greater than or equal to 1000, the results are calculated
+        System.out.println("\nsimulating trials now... one moment please...");
+
+        
+        // for every trial
+        for (int i = 0; i < numTrials; i++) {
+            randNum = randNumList.nextInt(11); // a random integer up to 10 is declared
+            while (randNum != 10) { // while this number does not equal 10
+                randNum = randNumList.nextInt(11); // another random number is used until it eventually equals 10
+                count++;  // count goes up each time
+        }
+        outFile.println(count); // File saves the number of times it takes to get 10 randomly
+        count = 1; // count resets to 1 for next trial
+}
+       outFile.close(); // file closes
+
+       File fileName = new File("animalPopulation.txt"); // draws information from the same text file that was created
+       Scanner inFile = new Scanner(fileName); // new scanner initialized that scans the file
+       // integers initialized
+       int token = 0;
+       int total = 0;
+       double average = 0;
+       
+       // while the file has another line
+       while(inFile.hasNext() ) {
+           token = inFile.nextInt(); // it saves each integer
+           total += token; // which is then added towards the total
+}
+       
+       average = ((double)total / (double)numTrials); // average is calculated by dividing the total by the number of trials
+       
+       // Displays the results
+       System.out.println("\nThe results!");
+       System.out.println("The average number of squirrels obsered until");
+       System.out.println("spotting a Fox Squirrel at the city park is: " + average);
+ 
+}
+}
