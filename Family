@@ -1,0 +1,54 @@
+import java.util.Scanner; 
+import java.io.File;
+import java.io.IOException;
+public class Family {
+    public static void main(String[] args) throws IOException {
+        
+        File fileName = new File("test1.txt"); // initializes what file will be used
+        Scanner inFile = new Scanner(fileName); // initializes the scanner
+        
+        String family = ""; // family string
+        
+        // integer counter for each of the options and the # of families
+        int twoBoys = 0;
+        int twoGirls = 0;
+        int oneEach = 0;
+        int numFamily = 0;
+        
+        // percentages of each option
+        double twoBoysPercent = 0;
+        double twoGirlsPercent = 0;
+        double oneEachPercent = 0;
+        
+        // loop that continues as long as there is another line
+        while(inFile.hasNextLine() ) {
+            family = inFile.nextLine(); // family string equals each line
+            if (family.equals("BB")) {  // if family string equals BB
+                twoBoys++; // the two boys counter goes up
+                numFamily++; // family counter goes up
+            } else if (family.equals("GG")) { // same code as above for the other options
+                twoGirls++;
+                numFamily++;
+            } else if (family.equals("BG") || family.equals("GB")) {
+                oneEach++;
+                numFamily++;
+            }
+        }
+        
+        inFile.close(); // input is no longer accepted
+        
+        // calculates the percent of each option based off the counters, truncates number to two decimal places
+        twoBoysPercent = (int)(100 * (100 * (double)twoBoys / numFamily)) / 100.0;
+        twoGirlsPercent = (int)(100 * (100 * (double)twoGirls / numFamily)) / 100.0;
+        oneEachPercent = (int)(100 * (100 * (double)oneEach / numFamily)) / 100.0;
+        
+        // displays the information
+        System.out.println("Composition statistics for families with two children.");
+        System.out.println("\nTotal Number of families: " + numFamily);
+        System.out.println("\nNumber of families with");
+        System.out.println("\t2 boys: " + twoBoys + " represents " + twoBoysPercent + "%");
+        System.out.println("\t2 girls: " + twoGirls + " represents " + twoGirlsPercent + "%"); 
+        System.out.println("\t1 boy 1 girl: " + oneEach + " represents " + oneEachPercent + "%");
+        
+    }
+}
